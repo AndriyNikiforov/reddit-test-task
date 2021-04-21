@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 const Page = require('./page');
 
 class RedditMainPage extends Page {
@@ -13,7 +14,15 @@ class RedditMainPage extends Page {
     return $('//button[@id="CountrySort--CountrySortPicker"]/span[text()="Everywhere"]');
   }
 
-  async mainPageActions() {
+  get linkTop() {
+    return $('//a[@href="/top/" and @role="button"]');
+  }
+
+  get postsVote() {
+    return $$('xpath', '//div[@style="color:rgb(26, 26, 27);"]');
+  }
+
+  async hotPostsAction() {
     await (await this.linkHot).waitForDisplayed({
       timeout: 5000,
     });
@@ -22,6 +31,19 @@ class RedditMainPage extends Page {
     await (await this.linkTopsGrowingCommunities).waitForDisplayed({
       timeout: 5000,
     });
+  }
+
+  async topPostsAction() {
+    await (await this.linkTop).waitForDisplayed({
+      timeout: 5000,
+    });
+    await (await this.linkTop).click();
+
+    const elements = (await this.postsVote);
+
+    if (Number(elements[0]) < Number(elements[1])) {
+      throw new Error('Second element biggest than first.');
+    }
   }
 
   open() {

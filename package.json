@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "wdio": "wdio",
-    "test": "wdio run wdio.remote.config.js"
+    "test": "wdio run"
   },
   "author": "",
   "license": "ISC",

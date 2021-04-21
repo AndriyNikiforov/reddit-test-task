@@ -2,11 +2,11 @@ const Page = require('./page');
 
 class RedditMainPage extends Page {
   get linkHot() {
-    return $('//a[@href="/hot/"]/span[text()="Hot" and not(@class)]');
+    return $('//a[@href="/hot/"][span[text()="Hot" and not(@class)]]');
   }
 
   get linkTopsGrowingCommunities() {
-    return $('=Today\'s Top Growing Communities');
+    return $('//a[contains(text(), "View All")]');
   }
 
   get filterCountry() {

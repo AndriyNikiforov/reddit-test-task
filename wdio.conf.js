@@ -60,7 +60,18 @@ exports.config = {
         maxInstances: 1,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        'goog:chromeOptions': {
+          args: [
+            'disable-infobars',
+            'disable-popup-blocking',
+            'disable-notifications'
+          ],
+          prefs: {
+            'profile.managed_default_content_settings.popups': 2,
+            'profile.managed_default_content_settings.': 2,
+          },
+        },
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -206,8 +217,9 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: function (test, context) {
+      browser.setWindowSize(1920, 1080);
+    },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)

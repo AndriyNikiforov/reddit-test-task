@@ -7,7 +7,7 @@ class RedditMainPage extends Page {
   }
 
   get linkTopsGrowingCommunities() {
-    return $('//a[contains(text(), "View All")]');
+    return $('=View All');
   }
 
   get filterCountry() {
@@ -22,24 +22,24 @@ class RedditMainPage extends Page {
     return $$('xpath', '//div[@style="color:rgb(26, 26, 27);"]');
   }
 
-  async hotPostsAction() {
-    await (await this.linkHot).waitForDisplayed({
+  hotPostsAction() {
+    this.linkHot.waitForDisplayed({
       timeout: 5000,
     });
-    await (await this.linkHot).click();
+    this.linkHot.click();
 
-    await (await this.linkTopsGrowingCommunities).waitForDisplayed({
+    this.linkTopsGrowingCommunities.waitForDisplayed({
       timeout: 5000,
     });
   }
 
-  async topPostsAction() {
-    await (await this.linkTop).waitForDisplayed({
+  topPostsAction() {
+    this.linkTop.waitForDisplayed({
       timeout: 5000,
     });
-    await (await this.linkTop).click();
+    this.linkTop.click();
 
-    const elements = (await this.postsVote);
+    const elements = this.postsVote;
 
     if (Number(elements[0]) < Number(elements[1])) {
       throw new Error('Second element biggest than first.');

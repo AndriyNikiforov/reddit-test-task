@@ -18,29 +18,48 @@ class RedditPostPage extends Page {
     return $('//button/span[contains(text(), "new")]');
   }
 
-  get commentsTime() {
-    return browser.findElements('xpath', '//a[@id]');
-  }
-
-  async postActions() {
-    await (await this.firstPost).waitForClickable({
+  postActions() {
+    this.firstPost.waitForClickable({
       timeout: 5000,
       timeoutMsg: 'Can\'t find a link to the first post',
     });
-    await (await this.firstPost).click();
+    this.firstPost.click();
 
-    await (await this.viewAllComments).waitForClickable({
+    this.viewAllComments.waitForClickable({
       timeout: 7000,
       timeoutMsg: 'Can\'t find a button to showing comments',
     });
 
-    await (await this.viewAllComments).click();
+    this.viewAllComments.click();
 
-    await (await this.sortByButton).click();
-    await (await this.sortOption).click();
+    this.sortByButton.scrollIntoView();
+    this.sortByButton.waitForClickable({
+      timeout: 5000,
+      timeoutMsg: 'Can\'t found a sort button',
+    });
+    this.sortByButton.click();
+    this.sortOption.click();
 
-    const timesComment = (await this.commentsTime);
-    console.debug('GGG', timesComment[0].getText());
+    browser.waitUntil(() => {
+      const state = browser.execute(() => document.readyState);
+
+      return state === 'complete';
+    }, {
+      timeout: 60000,
+      timeoutMsg: 'Oops! Check your internet connection',
+    });
+
+    const commentElements = browser.custom$$('jsQuery');
+    console.debug('GG', commentElements);
+    const timePosts = [];
+    commentElements.map((item) => timePosts.push(item.getText()));
+
+    // if (timePosts[0] === timePosts[timePosts.length - 1]) {
+    //   throw new Error('Similar time', {
+    //     first: timePosts[0],
+    //     last: timePosts[timePosts.length - 1],
+    //   });
+    // }
   }
 
   open() {

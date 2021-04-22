@@ -15,8 +15,20 @@ class RedditListPostsPage extends Page {
     return $('#LayoutSwitch--picker');
   }
 
-  get posts() {
-    return $$('xpath', '//h3');
+  get dateValues() {
+    return $$('(//a[contains(@data-click-id, "timestamp")])[position()  >= 1 and position() < 9]');
+  }
+
+  get commentsCount() {
+    return $$('(//a[contains(@data-click-id,"comments")]/span)[position()  >= 1 and position() < 9]');
+  }
+
+  get postTitle() {
+    return $('<h3 />');
+  }
+
+  get postTitles() {
+    return $$('(//h3)[position()  >= 1 and position() < 9]');
   }
 
   get linkTop() {
@@ -27,36 +39,121 @@ class RedditListPostsPage extends Page {
     return $('//span[contains(text(), "classic")]');
   }
 
-  async changePostView(element) {
-    await (await this.buttonLayoutSwitch).click();
-    await (await element).waitForClickable({
-      timeout: 5000,
-    });
-
-    await (await element).click();
+  get linkCompactOption() {
+    return $('//span[contains(text(), "compact")]');
   }
 
-  async topPageActions() {
-    browser.debug();
-    await (await this.linkTop).waitForDisplayed({
-      timeout: 5000,
-    });
-    await (await this.linkTop).click();
-
-    await (await this.buttonLayoutSwitch).waitForClickable({
-      timeout: 5000,
+  changePostView(element, waitElement) {
+    this.buttonLayoutSwitch.click();
+    element.waitForClickable({
+      timeout: 8000,
     });
 
-    let elements = (await this.posts);
-    log('Array', (await this.posts));
+    element.click();
 
-    await this.changePostView(this.linkClassicOption);
-    // await (await this.posts).waitForDisplayed({
-    //   timeout: 5000,
-    // });
+    waitElement.waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+  }
 
-    elements = (await this.posts);
-    elements.map((item) => this.classicPosts.push(item.getText()));
+  topPageCheckTitle() {
+    this.linkTop.waitForDisplayed({
+      timeout: 5000,
+    });
+    this.linkTop.click();
+
+    this.postTitle.waitForClickable({
+      timeout: 5000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    this.buttonLayoutSwitch.waitForDisplayed({
+      timeout: 5000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    const elementsCard = this.postTitles;
+    elementsCard.map((item) => this.cardPosts.push(item.getText()));
+
+    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    const elementsCompact = this.postTitles;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
+
+    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    const elementsClassic = this.postTitles;
+    elementsClassic.map((item) => this.classicPosts.push(item.getText()));
+
+    if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
+      throw new Error('Not equal');
+    }
+  }
+
+  topPageCheckDate() {
+    this.linkTop.waitForDisplayed({
+      timeout: 5000,
+    });
+    this.linkTop.click();
+
+    this.postTitle.waitForClickable({
+      timeout: 5000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    this.buttonLayoutSwitch.waitForDisplayed({
+      timeout: 5000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    const elementsCard = this.dateValues;
+    elementsCard.map((item) => this.cardPosts.push(item.getText()));
+
+    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    const elementsCompact = this.dateValues;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
+
+    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    const elementsClassic = this.dateValues;
+    elementsClassic.map((item) => this.classicPosts.push(item.getText()));
+
+    if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
+      throw new Error('Not equal');
+    }
+  }
+
+  topPageCommentsCount() {
+    this.linkTop.waitForDisplayed({
+      timeout: 5000,
+    });
+    this.linkTop.click();
+
+    this.postTitle.waitForClickable({
+      timeout: 5000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    this.buttonLayoutSwitch.waitForDisplayed({
+      timeout: 5000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    const elementsCard = this.commentsCount;
+    elementsCard.map((item) => this.cardPosts.push(item.getText()));
+
+    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    const elementsCompact = this.commentsCount;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
+
+    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    const elementsClassic = this.commentsCount;
+    elementsClassic.map((item) => this.classicPosts.push(item.getText()));
+    this.classicPosts.forEach((item, index) => {
+      this.classicPosts[index] = this.classicPosts[index].replace(' Comments', '');
+    });
+
+    if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
+      throw new Error('Not equal');
+    }
   }
 
   open() {

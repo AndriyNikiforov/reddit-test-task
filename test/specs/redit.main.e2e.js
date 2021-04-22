@@ -28,5 +28,6 @@ describe('Reddit main page', () => {
   it('Post actions', () => {
     RedditPostPage.open();
     RedditPostPage.postActions();
+    RedditPostPage.openReplayModalWindow();
   });
 });

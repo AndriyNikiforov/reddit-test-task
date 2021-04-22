@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "wdio": "wdio",
-    "test": "wdio run"
+    "test": "wdio run wdio.conf.js"
   },
   "author": "",
   "license": "ISC",

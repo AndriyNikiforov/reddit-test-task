@@ -60,7 +60,7 @@ class RedditPostPage extends Page {
     elements.map((item) => compareData.push(item.getText()));
 
     if (compareData[0] === compareData[compareData.length - 1]) {
-      throw new Error('Similar time', {
+      throw new Error('Similar items', {
         first: compareData[0],
         last: compareData[compareData.length - 1],
       });

@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 const RedditMainPage = require('../pageobjects/reddit.main.page');
-const RedditListPostsPage = require('../pageobjects/reddit.list.posts.page');
-const RedditPostPage = require('../pageobjects/reddit.post.page');
 
 describe('Reddit main page', () => {
   it('Selected hot option', () => {
@@ -15,19 +13,5 @@ describe('Reddit main page', () => {
   it('Selected top option', () => {
     RedditMainPage.open();
     RedditMainPage.topPostsAction();
-  });
-
-  it('Change post view', () => {
-    RedditListPostsPage.open();
-
-    RedditListPostsPage.topPageCheckTitle();
-    RedditListPostsPage.topPageCheckDate();
-    RedditListPostsPage.topPageCommentsCount();
-  });
-
-  it('Post actions', () => {
-    RedditPostPage.open();
-    RedditPostPage.postActions();
-    RedditPostPage.openReplayModalWindow();
   });
 });

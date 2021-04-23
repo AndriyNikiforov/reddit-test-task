@@ -10,6 +10,10 @@ class RedditPostPage extends Page {
     return $('//button[starts-with(text(), "View Entire Discussion")]');
   }
 
+  get comment() {
+    return $('//div[@data-testid="comment-top-meta"]');
+  }
+
   get sortByButton() {
     return $('//button[@id="CommentSort--SortPicker"]');
   }
@@ -20,6 +24,10 @@ class RedditPostPage extends Page {
 
   get replayButton() {
     return $$('//button[contains(text(), "Reply")]')[0];
+  }
+
+  get modalWindow() {
+    return $('//body/div[@id="2x-container"]/div[1]/div[2]/div[4]/div[2]/div[1]');
   }
 
   get googleButton() {
@@ -34,6 +42,31 @@ class RedditPostPage extends Page {
     return $('//body[1]/div[1]/main[1]/div[1]/div[1]/div[2]/form[1]/fieldset[1]');
   }
 
+  changeSortOption() {
+    this.sortByButton.scrollIntoView();
+
+    this.sortByButton.waitForClickable({
+      timeout: 7000,
+      timeoutMsg: 'Can\'t found a sort button',
+    });
+
+    this.sortByButton.click();
+    this.sortOption.click();
+  }
+
+  compareData(elements) {
+    const compareData = [];
+
+    elements.map((item) => compareData.push(item.getText()));
+
+    if (compareData[0] === compareData[compareData.length - 1]) {
+      throw new Error('Similar time', {
+        first: compareData[0],
+        last: compareData[compareData.length - 1],
+      });
+    }
+  }
+
   postActions() {
     this.firstPost.waitForClickable({
       timeout: 5000,
@@ -45,47 +78,20 @@ class RedditPostPage extends Page {
       timeout: 7000,
       timeoutMsg: 'Can\'t find a button to showing comments',
     });
-
     this.viewAllComments.click();
 
-    this.sortByButton.scrollIntoView();
-    this.sortByButton.waitForClickable({
-      timeout: 7000,
-      timeoutMsg: 'Can\'t found a sort button',
-    });
-    this.sortByButton.click();
-    this.sortOption.click();
-
-    $('//div[@data-testid="comment-top-meta"]').waitForDisplayed({
+    this.changeSortOption();
+    this.comment.waitForDisplayed({
       timeout: 8000,
       timeoutMsg: 'Not ready',
     });
 
-    const commentElements = $$('a[class="_1sA-1jNHouHDpgCp1fCQ_F"]');
-    const timeComments = [];
-    commentElements.map((item) => timeComments.push(item.getText()));
-
-    if (timeComments[0] === timeComments[timeComments.length - 1]) {
-      throw new Error('Similar time', {
-        first: timeComments[0],
-        last: timeComments[timeComments.length - 1],
-      });
-    }
-
-    const ratingElements = $$('div[style="color: rgb(26, 26, 27);"]');
-    const ratingComments = [];
-    ratingElements.map((item) => ratingComments.push(item.getText()));
-
-    if (ratingElements[0] === ratingElements[ratingElements.length - 1]) {
-      throw new Error('Similar time', {
-        first: ratingElements[0],
-        last: ratingElements[ratingElements.length - 1],
-      });
-    }
+    this.compareData($$('a[class="_1sA-1jNHouHDpgCp1fCQ_F"]'));
+    this.compareData($$('div[style="color: rgb(26, 26, 27);"]'));
   }
 
   openReplayModalWindow() {
-    $('//div[@data-testid="comment-top-meta"]').waitForDisplayed({
+    this.comment.waitForDisplayed({
       timeout: 7000,
       timeoutMsg: 'Not ready',
     });
@@ -94,27 +100,17 @@ class RedditPostPage extends Page {
       timeout: 5000,
       timeoutMsg: 'Not ready',
     });
-
     this.replayButton.click();
 
-    const divModal = $('//body/div[@id="2x-container"]/div[1]/div[2]/div[4]/div[2]/div[1]');
-    divModal.waitForDisplayed({
+    this.modalWindow.waitForDisplayed({
       timeout: 7000,
       timeoutMsg: 'Not found',
     });
 
-    const iframe = divModal.$('<iframe />');
+    const iframe = this.modalWindow.$('<iframe />');
     browser.switchToFrame(iframe);
 
     this.googleButton.waitForDisplayed({
-      timeout: 6000,
-    });
-
-    this.appleButton.waitForDisplayed({
-      timeout: 6000,
-    });
-
-    this.emailField.waitForDisplayed({
       timeout: 6000,
     });
   }

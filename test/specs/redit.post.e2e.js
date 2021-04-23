@@ -15,5 +15,9 @@ describe('Reddit posts page', () => {
     RedditPostPage.open();
     RedditPostPage.postActions();
     RedditPostPage.openReplayModalWindow();
+
+    expect(RedditPostPage.googleButton).toBeClickable();
+    expect(RedditPostPage.appleButton).toBeClickable();
+    expect(RedditPostPage.emailField).toBeClickable();
   });
 });

@@ -16,11 +16,11 @@ class RedditListPostsPage extends Page {
   }
 
   get dateValues() {
-    return $$('(//a[contains(@data-click-id, "timestamp")])[position()  >= 1 and position() < 9]');
+    return $$('(//a[contains(@data-click-id, "timestamp")])[position()  >= 1 and position() < 8]');
   }
 
   get commentsCount() {
-    return $$('(//a[contains(@data-click-id,"comments")]/span)[position()  >= 1 and position() < 9]');
+    return $$('(//a[contains(@data-click-id,"comments")]/span)[position()  >= 1 and position() < 8]');
   }
 
   get postTitle() {
@@ -28,7 +28,7 @@ class RedditListPostsPage extends Page {
   }
 
   get postTitles() {
-    return $$('(//h3)[position()  >= 1 and position() < 9]');
+    return $$('(//h3)[position()  >= 1 and position() < 8]');
   }
 
   get linkTop() {

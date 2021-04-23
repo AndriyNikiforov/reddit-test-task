@@ -31,7 +31,7 @@ class RedditPostPage extends Page {
   }
 
   get emailField() {
-    return $('[name="email"]');
+    return $('//body[1]/div[1]/main[1]/div[1]/div[1]/div[2]/form[1]/fieldset[1]');
   }
 
   postActions() {
@@ -72,9 +72,16 @@ class RedditPostPage extends Page {
       });
     }
 
-    // const ratingElements = $$();
-    // const ratingComments = [];
-    // //ratingElements
+    const ratingElements = $$('div[style="color: rgb(26, 26, 27);"]');
+    const ratingComments = [];
+    ratingElements.map((item) => ratingComments.push(item.getText()));
+
+    if (ratingElements[0] === ratingElements[ratingElements.length - 1]) {
+      throw new Error('Similar time', {
+        first: ratingElements[0],
+        last: ratingElements[ratingElements.length - 1],
+      });
+    }
   }
 
   openReplayModalWindow() {

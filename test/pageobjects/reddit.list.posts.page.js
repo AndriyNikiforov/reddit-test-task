@@ -59,12 +59,12 @@ class RedditListPostsPage extends Page {
 
   topPageCheckTitle() {
     this.linkTop.waitForDisplayed({
-      timeout: 5000,
+      timeout: 8000,
     });
     this.linkTop.click();
 
     this.postTitle.waitForClickable({
-      timeout: 5000,
+      timeout: 8000,
       timeoutMsg: 'Not loaded',
     });
 

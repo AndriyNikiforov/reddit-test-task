@@ -75,7 +75,7 @@ class RedditPostPage extends Page {
     this.firstPost.click();
 
     this.viewAllComments.waitForClickable({
-      timeout: 7000,
+      timeout: 9000,
       timeoutMsg: 'Can\'t find a button to showing comments',
     });
     this.viewAllComments.click();

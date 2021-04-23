@@ -43,18 +43,13 @@ class RedditListPostsPage extends Page {
     return $('//span[contains(text(), "compact")]');
   }
 
-  changePostView(element, waitElement) {
+  changePostView(element) {
     this.buttonLayoutSwitch.click();
     element.waitForClickable({
       timeout: 8000,
     });
 
     element.click();
-
-    waitElement.waitForClickable({
-      timeout: 8000,
-      timeoutMsg: 'Not loaded',
-    });
   }
 
   topPageCheckTitle() {
@@ -76,11 +71,21 @@ class RedditListPostsPage extends Page {
     const elementsCard = this.postTitles;
     elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    this.changePostView(this.linkCompactOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
     const elementsCompact = this.postTitles;
     elementsCompact.map((item) => this.compactPosts.push(item.getText()));
 
-    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    this.changePostView(this.linkClassicOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
     const elementsClassic = this.postTitles;
     elementsClassic.map((item) => this.classicPosts.push(item.getText()));
 
@@ -108,11 +113,21 @@ class RedditListPostsPage extends Page {
     const elementsCard = this.dateValues;
     elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    this.changePostView(this.linkCompactOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
     const elementsCompact = this.dateValues;
     elementsCompact.map((item) => this.compactPosts.push(item.getText()));
 
-    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    this.changePostView(this.linkClassicOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
     const elementsClassic = this.dateValues;
     elementsClassic.map((item) => this.classicPosts.push(item.getText()));
 
@@ -140,11 +155,21 @@ class RedditListPostsPage extends Page {
     const elementsCard = this.commentsCount;
     elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    this.changePostView(this.linkCompactOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
     const elementsCompact = this.commentsCount;
     elementsCompact.map((item) => this.compactPosts.push(item.getText()));
 
-    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    this.changePostView(this.linkClassicOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
     const elementsClassic = this.commentsCount;
     elementsClassic.map((item) => this.classicPosts.push(item.getText()));
     this.classicPosts.forEach((item, index) => {

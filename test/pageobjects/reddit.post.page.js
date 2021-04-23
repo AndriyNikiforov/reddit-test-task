@@ -18,6 +18,22 @@ class RedditPostPage extends Page {
     return $('//button/span[contains(text(), "new")]');
   }
 
+  get replayButton() {
+    return $$('//i[@cl]')[1];
+  }
+
+  get googleButton() {
+    return $('#google-sso');
+  }
+
+  get appleButton() {
+    return $('#appleid-signin');
+  }
+
+  get emailField() {
+    return $('#regEmail-prevent');
+  }
+
   postActions() {
     this.firstPost.waitForClickable({
       timeout: 5000,
@@ -40,26 +56,43 @@ class RedditPostPage extends Page {
     this.sortByButton.click();
     this.sortOption.click();
 
-    browser.waitUntil(() => {
-      const state = browser.execute(() => document.readyState);
-
-      return state === 'complete';
-    }, {
-      timeout: 60000,
-      timeoutMsg: 'Oops! Check your internet connection',
+    $('<p />').waitForDisplayed({
+      timeout: 7000,
+      timeoutMsg: 'Not ready',
     });
 
-    const commentElements = browser.custom$$('jsQuery');
-    console.debug('GG', commentElements);
-    const timePosts = [];
-    commentElements.map((item) => timePosts.push(item.getText()));
+    $('//span[contains(text(),"Stickied comment")]').waitForDisplayed({
+      timeout: 7000,
+      timeoutMsg: 'Not ready',
+    });
 
-    // if (timePosts[0] === timePosts[timePosts.length - 1]) {
-    //   throw new Error('Similar time', {
-    //     first: timePosts[0],
-    //     last: timePosts[timePosts.length - 1],
-    //   });
-    // }
+    const commentElements = $$('a[class="_1sA-1jNHouHDpgCp1fCQ_F"]');
+    const timeComments = [];
+    commentElements.map((item) => timeComments.push(item.getText()));
+
+    if (timeComments[0] === timeComments[timeComments.length - 1]) {
+      throw new Error('Similar time', {
+        first: timeComments[0],
+        last: timeComments[timeComments.length - 1],
+      });
+    }
+
+    // const ratingElements = $$();
+    // const ratingComments = [];
+    // //ratingElements
+  }
+
+  openReplayModalWindow() {
+    $('<p />').waitForDisplayed({
+      timeout: 7000,
+      timeoutMsg: 'Not ready',
+    });
+
+    this.replayButton.click();
+
+    this.googleButton.waitForClickable({
+      timeout: 6000,
+    });
   }
 
   open() {

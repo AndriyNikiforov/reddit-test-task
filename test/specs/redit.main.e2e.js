@@ -4,26 +4,26 @@ const RedditListPostsPage = require('../pageobjects/reddit.list.posts.page');
 const RedditPostPage = require('../pageobjects/reddit.post.page');
 
 describe('Reddit main page', () => {
-  // it('Selected hot option', () => {
-  //   RedditMainPage.open();
-  //   RedditMainPage.hotPostsAction();
+  it('Selected hot option', () => {
+    RedditMainPage.open();
+    RedditMainPage.hotPostsAction();
 
-  //   expect(RedditMainPage.linkTopsGrowingCommunities).toBeDisplayed();
-  //   expect(RedditMainPage.filterCountry).toHaveTextContaining('Everywhere');
-  // });
+    expect(RedditMainPage.linkTopsGrowingCommunities).toBeDisplayed();
+    expect(RedditMainPage.filterCountry).toHaveTextContaining('Everywhere');
+  });
 
-  // it('Selected top option', () => {
-  //   RedditMainPage.open();
-  //   RedditMainPage.topPostsAction();
-  // });
+  it('Selected top option', () => {
+    RedditMainPage.open();
+    RedditMainPage.topPostsAction();
+  });
 
-  // it('Change post view', () => {
-  //   RedditListPostsPage.open();
+  it('Change post view', () => {
+    RedditListPostsPage.open();
 
-  //   RedditListPostsPage.topPageCheckTitle();
-  //   RedditListPostsPage.topPageCheckDate();
-  //   RedditListPostsPage.topPageCommentsCount();
-  // });
+    RedditListPostsPage.topPageCheckTitle();
+    RedditListPostsPage.topPageCheckDate();
+    RedditListPostsPage.topPageCommentsCount();
+  });
 
   it('Post actions', () => {
     RedditPostPage.open();

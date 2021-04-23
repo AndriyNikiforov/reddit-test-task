@@ -29,5 +29,8 @@ describe('Reddit main page', () => {
     RedditPostPage.open();
     RedditPostPage.postActions();
     RedditPostPage.openReplayModalWindow();
+
+    // expect(RedditPostPage.appleButton).toBeDisplayed();
+    // expect(RedditPostPage.emailField).toBeDisplayed();
   });
 });

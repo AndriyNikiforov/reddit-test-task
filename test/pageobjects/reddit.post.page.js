@@ -11,7 +11,7 @@ class RedditPostPage extends Page {
   }
 
   get sortByButton() {
-    return $('//span[contains(text(), "best")]');
+    return $('//button[@id="CommentSort--SortPicker"]');
   }
 
   get sortOption() {
@@ -19,7 +19,7 @@ class RedditPostPage extends Page {
   }
 
   get replayButton() {
-    return $$('//i[@cl]')[1];
+    return $$('//button[contains(text(), "Reply")]')[0];
   }
 
   get googleButton() {
@@ -27,11 +27,11 @@ class RedditPostPage extends Page {
   }
 
   get appleButton() {
-    return $('#appleid-signin');
+    return $('.Sso__appleIdContainer');
   }
 
   get emailField() {
-    return $('#regEmail-prevent');
+    return $('[name="email"]');
   }
 
   postActions() {
@@ -50,19 +50,14 @@ class RedditPostPage extends Page {
 
     this.sortByButton.scrollIntoView();
     this.sortByButton.waitForClickable({
-      timeout: 5000,
+      timeout: 7000,
       timeoutMsg: 'Can\'t found a sort button',
     });
     this.sortByButton.click();
     this.sortOption.click();
 
-    $('<p />').waitForDisplayed({
-      timeout: 7000,
-      timeoutMsg: 'Not ready',
-    });
-
-    $('//span[contains(text(),"Stickied comment")]').waitForDisplayed({
-      timeout: 7000,
+    $('//div[@data-testid="comment-top-meta"]').waitForDisplayed({
+      timeout: 8000,
       timeoutMsg: 'Not ready',
     });
 
@@ -83,14 +78,36 @@ class RedditPostPage extends Page {
   }
 
   openReplayModalWindow() {
-    $('<p />').waitForDisplayed({
+    $('//div[@data-testid="comment-top-meta"]').waitForDisplayed({
       timeout: 7000,
+      timeoutMsg: 'Not ready',
+    });
+
+    this.replayButton.waitForClickable({
+      timeout: 5000,
       timeoutMsg: 'Not ready',
     });
 
     this.replayButton.click();
 
-    this.googleButton.waitForClickable({
+    const divModal = $('//body/div[@id="2x-container"]/div[1]/div[2]/div[4]/div[2]/div[1]');
+    divModal.waitForDisplayed({
+      timeout: 7000,
+      timeoutMsg: 'Not found',
+    });
+
+    const iframe = divModal.$('<iframe />');
+    browser.switchToFrame(iframe);
+
+    this.googleButton.waitForDisplayed({
+      timeout: 6000,
+    });
+
+    this.appleButton.waitForDisplayed({
+      timeout: 6000,
+    });
+
+    this.emailField.waitForDisplayed({
       timeout: 6000,
     });
   }

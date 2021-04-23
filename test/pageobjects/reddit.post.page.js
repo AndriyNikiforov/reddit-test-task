@@ -74,6 +74,11 @@ class RedditPostPage extends Page {
     });
     this.firstPost.click();
 
+    this.comment.waitForDisplayed({
+      timeout: 7000,
+      timeoutMsg: 'Can\'t find a comment',
+    });
+
     this.viewAllComments.waitForClickable({
       timeout: 7000,
       timeoutMsg: 'Can\'t find a button to showing comments',

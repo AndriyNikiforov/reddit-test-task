@@ -72,8 +72,12 @@ class RedditListPostsPage extends Page {
     });
 
     const elementsCard = this.postTitles;
-    const compactPosts = this.getPosts(this.linkCompactOption, elementsCard[0], this.postTitles);
-    const classicPosts = this.getPosts(this.linkClassicOption, elementsCard[0], this.postTitles);
+    const compactPosts = this.getPostsData(
+      this.linkCompactOption, elementsCard[0], this.postTitles,
+    );
+    const classicPosts = this.getPostsData(
+      this.linkClassicOption, elementsCard[0], this.postTitles,
+    );
 
     expect(compactPosts).toContain(classicPosts);
   }
@@ -95,10 +99,10 @@ class RedditListPostsPage extends Page {
     });
 
     const elementsCard = this.dateValues;
-    const compactPosts = this.changePostView(
+    const compactPosts = this.getPostsData(
       this.linkCompactOption, elementsCard[0], this.dateValues,
     );
-    const classicPosts = this.changePostView(
+    const classicPosts = this.getPostsData(
       this.linkClassicOption, elementsCard[0], this.dateValues,
     );
 
@@ -122,10 +126,10 @@ class RedditListPostsPage extends Page {
     });
 
     const elementsCard = this.commentsCount;
-    const compactPosts = this.changePostView(
+    const compactPosts = this.getPostsData(
       this.linkCompactOption, elementsCard[0], this.commentsCount,
     );
-    const classicPosts = this.changePostView(
+    const classicPosts = this.getPostsData(
       this.linkCompactOption, elementsCard[0], this.commentsCount,
     );
 

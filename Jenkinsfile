@@ -25,10 +25,20 @@ pipeline {
 
         stage('test') {
             steps {
-                dir('reddit-test-task') {
-                    echo 'Testing process'
-                    sh 'wdio wdio.conf.js'
-                }
+                 parallel(
+                        "First task": {
+                            dir('reddit-test-task') {
+                                echo 'Testing process'
+                                sh 'wdio wdio.conf.js'
+                            }
+                        },
+                        "Second task": {
+                            dir('reddit-test-task') {
+                                echo 'Testing process'
+                                sh 'wdio wdio.conf.js'
+                            }
+                        }
+                    )
             }
         }
     }

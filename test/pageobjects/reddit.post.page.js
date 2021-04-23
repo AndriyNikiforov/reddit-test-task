@@ -39,7 +39,7 @@ class RedditPostPage extends Page {
   }
 
   get emailField() {
-    return $('//body[1]/div[1]/main[1]/div[1]/div[1]/div[2]/form[1]/fieldset[1]');
+    return $('//input[@id="regEmail"]');
   }
 
   changeSortOption() {
@@ -111,6 +111,10 @@ class RedditPostPage extends Page {
     browser.switchToFrame(iframe);
 
     this.googleButton.waitForDisplayed({
+      timeout: 6000,
+    });
+
+    this.emailField.waitForDisplayed({
       timeout: 6000,
     });
   }

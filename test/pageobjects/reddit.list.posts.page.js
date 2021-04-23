@@ -16,11 +16,11 @@ class RedditListPostsPage extends Page {
   }
 
   get dateValues() {
-    return $$('(//a[contains(@data-click-id, "timestamp")])[position()  >= 1 and position() < 8]');
+    return $$('(//a[contains(@data-click-id, "timestamp")])[position()  >= 1 and position() < 9]');
   }
 
   get commentsCount() {
-    return $$('(//a[contains(@data-click-id,"comments")]/span)[position()  >= 1 and position() < 8]');
+    return $$('(//a[contains(@data-click-id,"comments")]/span)[position()  >= 1 and position() < 9]');
   }
 
   get postTitle() {
@@ -28,7 +28,7 @@ class RedditListPostsPage extends Page {
   }
 
   get postTitles() {
-    return $$('(//h3)[position()  >= 1 and position() < 8]');
+    return $$('(//h3)[position()  >= 1 and position() < 9]');
   }
 
   get linkTop() {
@@ -82,7 +82,7 @@ class RedditListPostsPage extends Page {
 
     this.changePostView(this.linkClassicOption);
     elementsCard[0].waitForClickable({
-      timeout: 8000,
+      timeout: 9000,
       timeoutMsg: 'Not loaded',
     });
 

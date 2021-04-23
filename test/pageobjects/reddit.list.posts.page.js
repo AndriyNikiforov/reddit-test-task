@@ -1,7 +1,16 @@
 /* eslint-disable class-methods-use-this */
+const { debug, log } = require('console');
+
 const Page = require('./page');
 
 class RedditListPostsPage extends Page {
+  constructor() {
+    super();
+    this.cardPosts = [];
+    this.classicPosts = [];
+    this.compactPosts = [];
+  }
+
   get buttonLayoutSwitch() {
     return $('#LayoutSwitch--picker');
   }
@@ -34,7 +43,7 @@ class RedditListPostsPage extends Page {
     return $('//span[contains(text(), "compact")]');
   }
 
-  getPostsData(element, waitElement, from) {
+  changePostView(element, waitElement) {
     this.buttonLayoutSwitch.click();
     element.waitForClickable({
       timeout: 8000,
@@ -46,13 +55,6 @@ class RedditListPostsPage extends Page {
       timeout: 8000,
       timeoutMsg: 'Not loaded',
     });
-
-    const elementsList = from;
-    const tmpArray = [];
-
-    elementsList.map((item) => tmpArray.push(item.getText()));
-
-    return JSON.stringify(tmpArray);
   }
 
   topPageCheckTitle() {
@@ -72,14 +74,19 @@ class RedditListPostsPage extends Page {
     });
 
     const elementsCard = this.postTitles;
-    const compactPosts = this.getPostsData(
-      this.linkCompactOption, elementsCard[0], this.postTitles,
-    );
-    const classicPosts = this.getPostsData(
-      this.linkClassicOption, elementsCard[0], this.postTitles,
-    );
+    elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    expect(compactPosts).toContain(classicPosts);
+    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    const elementsCompact = this.postTitles;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
+
+    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    const elementsClassic = this.postTitles;
+    elementsClassic.map((item) => this.classicPosts.push(item.getText()));
+
+    if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
+      throw new Error('Not equal');
+    }
   }
 
   topPageCheckDate() {
@@ -99,14 +106,19 @@ class RedditListPostsPage extends Page {
     });
 
     const elementsCard = this.dateValues;
-    const compactPosts = this.getPostsData(
-      this.linkCompactOption, elementsCard[0], this.dateValues,
-    );
-    const classicPosts = this.getPostsData(
-      this.linkClassicOption, elementsCard[0], this.dateValues,
-    );
+    elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    expect(compactPosts).toContain(classicPosts);
+    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    const elementsCompact = this.dateValues;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
+
+    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    const elementsClassic = this.dateValues;
+    elementsClassic.map((item) => this.classicPosts.push(item.getText()));
+
+    if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
+      throw new Error('Not equal');
+    }
   }
 
   topPageCommentsCount() {
@@ -126,14 +138,22 @@ class RedditListPostsPage extends Page {
     });
 
     const elementsCard = this.commentsCount;
-    const compactPosts = this.getPostsData(
-      this.linkCompactOption, elementsCard[0], this.commentsCount,
-    );
-    const classicPosts = this.getPostsData(
-      this.linkCompactOption, elementsCard[0], this.commentsCount,
-    );
+    elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    expect(compactPosts).toContain(classicPosts);
+    this.changePostView(this.linkCompactOption, elementsCard[0]);
+    const elementsCompact = this.commentsCount;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
+
+    this.changePostView(this.linkClassicOption, elementsCard[0]);
+    const elementsClassic = this.commentsCount;
+    elementsClassic.map((item) => this.classicPosts.push(item.getText()));
+    this.classicPosts.forEach((item, index) => {
+      this.classicPosts[index] = this.classicPosts[index].replace(' Comments', '');
+    });
+
+    if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
+      throw new Error('Not equal');
+    }
   }
 
   open() {

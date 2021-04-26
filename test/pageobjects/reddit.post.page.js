@@ -95,7 +95,7 @@ class RedditPostPage extends Page {
 
   openReplayModalWindow() {
     this.comment.waitForDisplayed({
-      timeout: 7000,
+      timeout: 8000,
       timeoutMsg: 'Not ready',
     });
 

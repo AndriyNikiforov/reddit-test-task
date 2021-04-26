@@ -50,6 +50,10 @@ class RedditListPostsPage extends Page {
     });
 
     element.click();
+
+    this.postTitle.waitForDisplayed({
+      timeout: 6000,
+    });
   }
 
   topPageCheckTitle() {

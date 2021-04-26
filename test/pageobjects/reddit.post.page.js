@@ -102,8 +102,8 @@ class RedditPostPage extends Page {
       timeoutMsg: 'Not ready',
     });
 
-    this.replayButton.waitForClickable({
-      timeout: 9000,
+    this.replayButton.waitForDisplayed({
+      timeout: 8000,
       timeoutMsg: 'Not ready',
     });
     this.replayButton.click();

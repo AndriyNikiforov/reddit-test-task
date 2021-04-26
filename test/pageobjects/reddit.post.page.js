@@ -67,7 +67,7 @@ class RedditPostPage extends Page {
 
   postActions() {
     this.firstPost.waitForClickable({
-      timeout: 5000,
+      timeout: 7000,
       timeoutMsg: 'Can\'t find a link to the first post',
     });
     this.firstPost.click();
@@ -84,6 +84,10 @@ class RedditPostPage extends Page {
     this.viewAllComments.click();
 
     this.changeSortOption();
+    this.comment.waitForDisplayed({
+      timeout: 7000,
+    });
+
     this.comment.waitForDisplayed({
       timeout: 8000,
       timeoutMsg: 'Not ready',

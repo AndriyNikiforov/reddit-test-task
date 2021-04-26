@@ -24,12 +24,12 @@ class RedditMainPage extends Page {
 
   hotPostsAction() {
     this.linkHot.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
     });
     this.linkHot.click();
 
     this.linkTopsGrowingCommunities.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
     });
   }
 

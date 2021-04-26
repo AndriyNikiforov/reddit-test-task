@@ -44,16 +44,12 @@ class RedditListPostsPage extends Page {
   }
 
   changePostView(element) {
-    this.buttonLayoutSwitch.click();
-    element.waitForClickable({
-      timeout: 8000,
-    });
-
-    element.click();
-
-    this.postTitle.waitForDisplayed({
+    this.buttonLayoutSwitch.waitForClickable({
       timeout: 6000,
     });
+    this.buttonLayoutSwitch.click();
+
+    element.click();
   }
 
   topPageCheckTitle() {
@@ -68,8 +64,7 @@ class RedditListPostsPage extends Page {
     });
 
     this.buttonLayoutSwitch.waitForDisplayed({
-      timeout: 7000,
-      timeoutMsg: 'Not loaded',
+      timeout: 8000,
     });
 
     const elementsCard = this.postTitles;
@@ -110,8 +105,7 @@ class RedditListPostsPage extends Page {
     });
 
     this.buttonLayoutSwitch.waitForDisplayed({
-      timeout: 7000,
-      timeoutMsg: 'Not loaded',
+      timeout: 8000,
     });
 
     const elementsCard = this.dateValues;
@@ -128,7 +122,7 @@ class RedditListPostsPage extends Page {
 
     this.changePostView(this.linkClassicOption);
     elementsCard[0].waitForClickable({
-      timeout: 8000,
+      timeout: 9000,
       timeoutMsg: 'Not loaded',
     });
 
@@ -152,8 +146,7 @@ class RedditListPostsPage extends Page {
     });
 
     this.buttonLayoutSwitch.waitForDisplayed({
-      timeout: 7000,
-      timeoutMsg: 'Not loaded',
+      timeout: 8000,
     });
 
     const elementsCard = this.commentsCount;
@@ -170,7 +163,7 @@ class RedditListPostsPage extends Page {
 
     this.changePostView(this.linkClassicOption);
     elementsCard[0].waitForClickable({
-      timeout: 8000,
+      timeout: 9000,
       timeoutMsg: 'Not loaded',
     });
 

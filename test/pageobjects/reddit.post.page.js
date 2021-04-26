@@ -23,7 +23,7 @@ class RedditPostPage extends Page {
   }
 
   get replayButton() {
-    return $$('//button[contains(text(), "Reply")]')[0];
+    return $$('//button[contains(text(), "Reply")]')[1];
   }
 
   get modalWindow() {

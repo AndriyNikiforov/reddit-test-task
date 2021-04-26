@@ -106,7 +106,7 @@ class RedditListPostsPage extends Page {
     });
 
     this.buttonLayoutSwitch.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
       timeoutMsg: 'Not loaded',
     });
 

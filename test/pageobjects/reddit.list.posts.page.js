@@ -64,7 +64,7 @@ class RedditListPostsPage extends Page {
     });
 
     this.buttonLayoutSwitch.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
       timeoutMsg: 'Not loaded',
     });
 
@@ -96,7 +96,7 @@ class RedditListPostsPage extends Page {
 
   topPageCheckDate() {
     this.linkTop.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
     });
     this.linkTop.click();
 
@@ -138,17 +138,17 @@ class RedditListPostsPage extends Page {
 
   topPageCommentsCount() {
     this.linkTop.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
     });
     this.linkTop.click();
 
     this.postTitle.waitForClickable({
-      timeout: 5000,
+      timeout: 7000,
       timeoutMsg: 'Not loaded',
     });
 
     this.buttonLayoutSwitch.waitForDisplayed({
-      timeout: 5000,
+      timeout: 7000,
       timeoutMsg: 'Not loaded',
     });
 

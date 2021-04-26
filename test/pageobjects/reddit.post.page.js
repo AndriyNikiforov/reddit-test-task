@@ -73,7 +73,7 @@ class RedditPostPage extends Page {
     this.firstPost.click();
 
     this.comment.waitForDisplayed({
-      timeout: 7000,
+      timeout: 9000,
       timeoutMsg: 'Can\'t find a comment',
     });
 
@@ -104,7 +104,7 @@ class RedditPostPage extends Page {
     });
 
     this.replayButton.waitForDisplayed({
-      timeout: 8000,
+      timeout: 9000,
       timeoutMsg: 'Not ready',
     });
     this.replayButton.click();

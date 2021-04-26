@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'ianwalter/puppeteer:latest'
+            image 'lebowski25kurt/webdriverio:latest'
             args '-p 3000:3000'
         }
     }
@@ -10,8 +10,8 @@ pipeline {
         stage('build') {
             steps {
                 echo 'Build process'
+                sh 'firefox -v'
                 sh 'google-chrome --version'
-                sh 'npm install -g @wdio/cli'
                 sh 'rm -rf reddit-test-task'
                 sh 'git clone https://github.com/AndriyNikiforov/reddit-test-task.git'
                 dir('reddit-test-task') {
@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('test') {
+         stage('test') {
             steps {
                  parallel(
                         "First task": {
@@ -35,7 +35,7 @@ pipeline {
                         "Second task": {
                             dir('reddit-test-task') {
                                 echo 'Testing process'
-                                sh 'wdio wdio.conf.js'
+                                sh 'wdio wdio.conf.firefox.js'
                             }
                         }
                     )

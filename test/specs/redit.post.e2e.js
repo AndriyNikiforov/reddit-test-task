@@ -18,6 +18,5 @@ describe('Reddit posts page', () => {
 
     expect(RedditPostPage.googleButton).toBeClickable();
     expect(RedditPostPage.appleButton).toBeClickable();
-    expect(RedditPostPage.emailField).toBeClickable();
   });
 });

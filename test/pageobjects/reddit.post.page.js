@@ -38,8 +38,8 @@ class RedditPostPage extends Page {
     return $('.Sso__appleIdContainer');
   }
 
-  get emailField() {
-    return $('//input[@id="regEmail"]');
+  get emailButton() {
+    return $('//button[@data-step="email"]');
   }
 
   changeSortOption() {
@@ -103,7 +103,7 @@ class RedditPostPage extends Page {
     });
 
     this.replayButton.waitForClickable({
-      timeout: 5000,
+      timeout: 9000,
       timeoutMsg: 'Not ready',
     });
     this.replayButton.click();
@@ -117,10 +117,6 @@ class RedditPostPage extends Page {
     browser.switchToFrame(iframe);
 
     this.googleButton.waitForDisplayed({
-      timeout: 6000,
-    });
-
-    this.emailField.waitForDisplayed({
       timeout: 6000,
     });
   }

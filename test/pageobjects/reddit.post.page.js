@@ -43,8 +43,6 @@ class RedditPostPage extends Page {
   }
 
   changeSortOption() {
-    this.sortByButton.scrollIntoView();
-
     this.sortByButton.waitForClickable({
       timeout: 7000,
       timeoutMsg: 'Can\'t found a sort button',
@@ -80,10 +78,9 @@ class RedditPostPage extends Page {
     });
 
     this.viewAllComments.waitForClickable({
-      timeout: 7000,
+      timeout: 8000,
       timeoutMsg: 'Can\'t find a button to showing comments',
     });
-    this.viewAllComments.scrollIntoView();
     this.viewAllComments.click();
 
     this.changeSortOption();
@@ -109,7 +106,7 @@ class RedditPostPage extends Page {
     this.replayButton.click();
 
     this.modalWindow.waitForDisplayed({
-      timeout: 7000,
+      timeout: 8000,
       timeoutMsg: 'Not found',
     });
 

@@ -63,8 +63,8 @@ exports.config = {
     acceptInsecureCerts: true,
     'moz:firefoxOptions': {
       args: [
-        // '--headless',
-        // '--disable-gpu',
+        '--headless',
+        '--disable-gpu',
       ],
       prefs: {
         binary: '',

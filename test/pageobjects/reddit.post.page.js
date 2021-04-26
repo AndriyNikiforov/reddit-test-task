@@ -27,11 +27,11 @@ class RedditPostPage extends Page {
   }
 
   get commentVotes() {
-    return $$('//div[style="color: rgb(26, 26, 27);"]');
+    return $$('div[style="color: rgb(26, 26, 27);"]');
   }
 
   get commentDates() {
-    return $$('//a[class="_1sA-1jNHouHDpgCp1fCQ_F"]');
+    return $$('a[class="_1sA-1jNHouHDpgCp1fCQ_F"]');
   }
 
   get replayButton() {

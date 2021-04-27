@@ -11,12 +11,26 @@ exports.config = {
     './test/specs/*.js',
   ],
 
-  maxInstance: 2,
+  maxInstance: 1,
 
   capabilities: [{
     browserName: 'chrome',
   }],
 
+  bail: 0,
+  waitforTimeout: 10000,
+  connectionRetryTimeout: 90000,
+  connectionRetryCount: 3,
+
+  mochaOpts: {
+    ui: 'bdd',
+    timeout: 60000,
+  },
+
   framework: 'mocha',
   reports: ['allure'],
+
+  after(result, capabilities, specs) {
+    browser.closeWindow();
+  },
 };

@@ -18,9 +18,21 @@ describe('Reddit posts page', () => {
     RedditListPostsPage.topPageCommentsCount();
   });
 
-  it('Post page actions', () => {
+  it('Check new comments', () => {
     RedditPostPage.open();
-    RedditPostPage.postActions();
+    RedditPostPage.openFirstPost();
+    RedditPostPage.checkNewComments();
+  });
+
+  it('Check top comments', () => {
+    RedditPostPage.open();
+    RedditPostPage.openFirstPost();
+    RedditPostPage.checkTopComments();
+  });
+
+  it('Replay action', () => {
+    RedditPostPage.open();
+    RedditPostPage.openFirstPost();
     RedditPostPage.openReplayModalWindow();
 
     expect(RedditPostPage.googleButton).toBeClickable();

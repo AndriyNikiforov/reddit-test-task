@@ -76,7 +76,7 @@ class RedditPostPage extends Page {
     this.changeSortOption(this.sortOptionTop);
 
     this.viewAllComments.waitForDisplayed({
-      timeout: 8000,
+      timeout: 9000,
     });
 
     const compareData = [];

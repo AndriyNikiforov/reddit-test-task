@@ -76,10 +76,6 @@ class RedditPostPage extends Page {
       timeout: 9000,
     });
 
-    this.comment.waitForClickable({
-      timeout: 9000,
-    });
-
     const compareData = [];
     this.commentDates.map((item) => compareData.push(item.getText()));
 

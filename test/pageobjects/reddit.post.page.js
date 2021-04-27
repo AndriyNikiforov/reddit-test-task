@@ -71,11 +71,11 @@ class RedditPostPage extends Page {
     this.firstPost.click();
   }
 
-  checkTopComments() {
+  checkComments() {
     this.sortByButton.scrollIntoView();
-    this.changeSortOption(this.sortOptionTop);
+    this.changeSortOption(this.sortOptionNew);
     this.viewAllComments.waitForDisplayed({
-      timeout: 8000,
+      timeout: 9000,
     });
     const compareData = [];
 
@@ -87,15 +87,6 @@ class RedditPostPage extends Page {
         last: compareData[compareData.length - 1],
       });
     }
-  }
-
-  checkNewComments() {
-    this.sortByButton.scrollIntoView();
-    this.changeSortOption(this.sortOptionNew);
-    this.viewAllComments.waitForDisplayed({
-      timeout: 9000,
-    });
-    const compareData = [];
 
     this.commentDates.map((item) => compareData.push(item.getText()));
 

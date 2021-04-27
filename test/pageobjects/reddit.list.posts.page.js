@@ -100,7 +100,7 @@ class RedditListPostsPage extends Page {
     this.linkTop.click();
 
     this.postTitle.waitForClickable({
-      timeout: 7000,
+      timeout: 8000,
       timeoutMsg: 'Not loaded',
     });
 

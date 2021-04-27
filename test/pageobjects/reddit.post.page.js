@@ -94,7 +94,7 @@ class RedditPostPage extends Page {
   checkNewComments() {
     this.sortByButton.scrollIntoView();
     this.changeSortOption(this.sortOptionNew);
-    this.comment.waitForDisplayed({
+    this.viewAllComments.waitForDisplayed({
       timeout: 8000,
     });
     const compareData = [];

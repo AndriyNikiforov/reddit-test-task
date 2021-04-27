@@ -88,6 +88,7 @@ class RedditPostPage extends Page {
       });
     }
 
+    compareData.length = 0;
     this.commentDates.map((item) => compareData.push(item.getText()));
 
     if (compareData[0] === compareData[compareData.length - 1]) {

@@ -2,7 +2,7 @@
 const RedditPostPage = require('../pageobjects/reddit.post.page');
 
 describe('Reddit posts page', () => {
-  it('Check new comments', () => {
+  it('Check comments', () => {
     RedditPostPage.open();
     RedditPostPage.openFirstPost();
     RedditPostPage.checkComments();

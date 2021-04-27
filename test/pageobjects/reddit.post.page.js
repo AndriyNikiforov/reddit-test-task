@@ -23,11 +23,11 @@ class RedditPostPage extends Page {
   }
 
   get sortOptionTop() {
-    return $('//button/span[contains(text(), "best")]');
+    return $('//button/span[contains(text(), "top")]');
   }
 
   get commentVotes() {
-    return $$('div[style="color: rgb(26, 26, 27);"]');
+    return $$('(//div[@style="color: rgb(26, 26, 27);" and contains(@class, "_1rZYMD_4xY3gRcSS3p8ODO ")])[position() < 10]');
   }
 
   get commentDates() {
@@ -54,6 +54,10 @@ class RedditPostPage extends Page {
     return $('//button[@data-step="email"]');
   }
 
+  get linkTop() {
+    return $('//a[@href="/top/" and @role="button"]');
+  }
+
   changeSortOption(element) {
     this.sortByButton.waitForClickable({
       timeout: 7000,
@@ -65,13 +69,35 @@ class RedditPostPage extends Page {
   }
 
   openFirstPost() {
+    this.linkTop.waitForDisplayed({
+      timeout: 5000,
+    });
+    this.linkTop.click();
+
     this.firstPost.waitForClickable({
-      timeout: 8000,
+      timeout: 6000,
     });
     this.firstPost.click();
   }
 
-  checkComments() {
+  checkTopComments() {
+    this.comment.waitForDisplayed({
+      timeout: 8000,
+    });
+    const elements = this.commentVotes;
+    const compareData = [];
+
+    elements.map((item) => compareData.push(item.getText()));
+
+    if (compareData[0] === compareData[compareData.length - 1]) {
+      throw new Error({
+        first: compareData[0],
+        last: compareData[compareData.length - 1],
+      });
+    }
+  }
+
+  checkNewComments() {
     this.sortByButton.scrollIntoView();
     this.changeSortOption(this.sortOptionNew);
     this.viewAllComments.waitForDisplayed({
@@ -79,16 +105,6 @@ class RedditPostPage extends Page {
     });
     const compareData = [];
 
-    this.commentDates.map((item) => compareData.push(item.getText()));
-
-    if (compareData[0] === compareData[compareData.length - 1]) {
-      throw new Error('Similar items', {
-        first: compareData[0],
-        last: compareData[compareData.length - 1],
-      });
-    }
-
-    compareData.length = 0;
     this.commentDates.map((item) => compareData.push(item.getText()));
 
     if (compareData[0] === compareData[compareData.length - 1]) {

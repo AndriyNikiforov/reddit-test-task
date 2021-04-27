@@ -2,10 +2,16 @@
 const RedditPostPage = require('../pageobjects/reddit.post.page');
 
 describe('Reddit posts page', () => {
-  it('Check comments', () => {
+  it('Check top comments', () => {
     RedditPostPage.open();
     RedditPostPage.openFirstPost();
-    RedditPostPage.checkComments();
+    RedditPostPage.checkTopComments();
+  });
+
+  it('Check new comments', () => {
+    RedditPostPage.open();
+    RedditPostPage.openFirstPost();
+    RedditPostPage.checkNewComments();
   });
 
   it('Replay action', () => {

@@ -72,15 +72,11 @@ class RedditPostPage extends Page {
   }
 
   checkTopComments() {
-    this.sortByButton.scrollIntoView();
-    this.changeSortOption(this.sortOptionTop);
-
-    this.viewAllComments.waitForDisplayed({
-      timeout: 8000,
+    this.comment.waitForDisplayed({
+      timeout: 9000,
     });
 
     const compareData = [];
-
     this.commentDates.map((item) => compareData.push(item.getText()));
 
     if (compareData[0] === compareData[compareData.length - 1]) {

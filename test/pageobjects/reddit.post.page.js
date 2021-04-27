@@ -73,7 +73,7 @@ class RedditPostPage extends Page {
 
   checkTopComments() {
     this.sortByButton.scrollIntoView();
-    this.changeSortOption(this.sortOptionNew);
+    this.changeSortOption(this.sortOptionTop);
     this.viewAllComments.waitForDisplayed({
       timeout: 8000,
     });
@@ -93,7 +93,7 @@ class RedditPostPage extends Page {
     this.sortByButton.scrollIntoView();
     this.changeSortOption(this.sortOptionNew);
     this.viewAllComments.waitForDisplayed({
-      timeout: 8000,
+      timeout: 9000,
     });
     const compareData = [];
 

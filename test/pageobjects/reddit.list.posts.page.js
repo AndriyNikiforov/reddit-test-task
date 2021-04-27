@@ -113,7 +113,7 @@ class RedditListPostsPage extends Page {
 
     this.changePostView(this.linkCompactOption);
     elementsCard[0].waitForClickable({
-      timeout: 8000,
+      timeout: 9000,
       timeoutMsg: 'Not loaded',
     });
 

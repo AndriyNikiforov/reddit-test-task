@@ -94,7 +94,7 @@ class RedditPostPage extends Page {
   checkNewComments() {
     this.sortByButton.scrollIntoView();
     this.changeSortOption(this.sortOptionNew);
-    this.comment.waitForDisplayed({
+    this.viewAllComments.waitForDisplayed({
       timeout: 8000,
     });
     const compareData = [];
@@ -115,10 +115,6 @@ class RedditPostPage extends Page {
       timeoutMsg: 'Not ready',
     });
 
-    this.replayButton.waitForDisplayed({
-      timeout: 9000,
-      timeoutMsg: 'Not ready',
-    });
     this.comment.scrollIntoView();
     this.replayButton.click();
 

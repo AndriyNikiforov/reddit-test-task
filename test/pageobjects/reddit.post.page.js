@@ -23,7 +23,7 @@ class RedditPostPage extends Page {
   }
 
   get sortOptionTop() {
-    return $('//button/span[contains(text(), "top")]');
+    return $('//button/span[contains(text(), "best")]');
   }
 
   get commentVotes() {
@@ -72,15 +72,13 @@ class RedditPostPage extends Page {
   }
 
   checkTopComments() {
-    $('//a[contains(text(),"View discussions in")]').waitForDisplayed({
-      timeout: 9000,
+    this.sortByButton.scrollIntoView();
+    this.changeSortOption(this.sortOptionNew);
+    this.viewAllComments.waitForDisplayed({
+      timeout: 8000,
     });
-
-    this.comment.waitForClickable({
-      timeout: 9000,
-    });
-
     const compareData = [];
+
     this.commentDates.map((item) => compareData.push(item.getText()));
 
     if (compareData[0] === compareData[compareData.length - 1]) {

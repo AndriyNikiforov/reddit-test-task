@@ -75,7 +75,7 @@ class RedditPostPage extends Page {
     this.linkTop.click();
 
     this.firstPost.waitForClickable({
-      timeout: 6000,
+      timeout: 7000,
     });
     this.firstPost.click();
   }

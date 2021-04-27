@@ -35,7 +35,7 @@ services:
       - SELENIUM_NODE_HOST={{CONTAINER_IP}}
       - SCREEN_WIDTH=1300
       - SCREEN_HEIGHT=999
-      - VIDEO=false
+      - VIDEO=true
       - GRID=false
       - CHROME=true
       - FIREFOX=false
@@ -60,7 +60,7 @@ services:
       - SELENIUM_NODE_HOST={{CONTAINER_IP}}
       - SCREEN_WIDTH=1300
       - SCREEN_HEIGHT=999
-      - VIDEO=false
+      - VIDEO=true
       - GRID=false
       - CHROME=false
       - FIREFOX=true

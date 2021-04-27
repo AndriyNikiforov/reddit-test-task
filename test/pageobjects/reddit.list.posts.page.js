@@ -136,12 +136,12 @@ class RedditListPostsPage extends Page {
 
   topPageCommentsCount() {
     this.linkTop.waitForDisplayed({
-      timeout: 7000,
+      timeout: 8000,
     });
     this.linkTop.click();
 
     this.postTitle.waitForClickable({
-      timeout: 7000,
+      timeout: 8000,
       timeoutMsg: 'Not loaded',
     });
 

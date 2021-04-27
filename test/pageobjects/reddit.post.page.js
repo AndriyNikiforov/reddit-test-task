@@ -72,7 +72,11 @@ class RedditPostPage extends Page {
   }
 
   checkTopComments() {
-    this.comment.waitForDisplayed({
+    $('//a[contains(text(),"View discussions in")]').waitForDisplayed({
+      timeout: 9000,
+    });
+
+    this.comment.waitForClickable({
       timeout: 9000,
     });
 

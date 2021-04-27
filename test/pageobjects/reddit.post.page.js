@@ -81,6 +81,9 @@ class RedditPostPage extends Page {
   }
 
   checkTopComments() {
+    this.sortByButton.waitForClickable({
+      timeout: 6000,
+    });
     this.comment.waitForDisplayed({
       timeout: 8000,
     });

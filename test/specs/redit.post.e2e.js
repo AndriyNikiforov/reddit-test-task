@@ -18,16 +18,16 @@ describe('Reddit posts page', () => {
     RedditListPostsPage.topPageCommentsCount();
   });
 
-  it('Check new comments', () => {
-    RedditPostPage.open();
-    RedditPostPage.openFirstPost();
-    RedditPostPage.checkNewComments();
-  });
-
   it('Check top comments', () => {
     RedditPostPage.open();
     RedditPostPage.openFirstPost();
     RedditPostPage.checkTopComments();
+  });
+
+  it('Check new comments', () => {
+    RedditPostPage.open();
+    RedditPostPage.openFirstPost();
+    RedditPostPage.checkNewComments();
   });
 
   it('Replay action', () => {

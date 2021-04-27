@@ -83,7 +83,7 @@ exports.config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'error',
+  logLevel: 'debug',
   //
   // Set specific log levels per logger
   // loggers:
@@ -110,7 +110,7 @@ exports.config = {
   baseUrl: 'http://localhost',
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 10000,
+  waitforTimeout: 12000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response

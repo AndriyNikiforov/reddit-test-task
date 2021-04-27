@@ -152,15 +152,6 @@ class RedditListPostsPage extends Page {
     const elementsCard = this.commentsCount;
     elementsCard.map((item) => this.cardPosts.push(item.getText()));
 
-    this.changePostView(this.linkCompactOption);
-    elementsCard[0].waitForClickable({
-      timeout: 8000,
-      timeoutMsg: 'Not loaded',
-    });
-
-    const elementsCompact = this.commentsCount;
-    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
-
     this.changePostView(this.linkClassicOption);
     elementsCard[0].waitForClickable({
       timeout: 9000,
@@ -172,6 +163,15 @@ class RedditListPostsPage extends Page {
     this.classicPosts.forEach((item, index) => {
       this.classicPosts[index] = this.classicPosts[index].replace(' Comments', '');
     });
+
+    this.changePostView(this.linkCompactOption);
+    elementsCard[0].waitForClickable({
+      timeout: 8000,
+      timeoutMsg: 'Not loaded',
+    });
+
+    const elementsCompact = this.commentsCount;
+    elementsCompact.map((item) => this.compactPosts.push(item.getText()));
 
     if (JSON.stringify(this.classicPosts) !== JSON.stringify(this.compactPosts)) {
       throw new Error('Not equal');

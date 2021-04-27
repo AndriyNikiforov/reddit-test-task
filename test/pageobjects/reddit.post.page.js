@@ -115,10 +115,6 @@ class RedditPostPage extends Page {
       timeoutMsg: 'Not ready',
     });
 
-    this.replayButton.waitForDisplayed({
-      timeout: 9000,
-      timeoutMsg: 'Not ready',
-    });
     this.comment.scrollIntoView();
     this.replayButton.click();
 

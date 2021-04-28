@@ -5,6 +5,7 @@ exports.config = {
     saveOnFail: true,
   },
   videos: {
+    dir: 'reports/videos',
     enabled: true,
     inputFormat: 'mp4',
     startDelay: 500,

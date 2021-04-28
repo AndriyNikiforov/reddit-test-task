@@ -15,6 +15,17 @@ exports.config = {
 
   capabilities: [{
     browserName: 'chrome',
+    'goog:chromeOptions': {
+      args: [
+        '--no-sandbox',
+        'disable-infobars',
+        'disable-popup-blocking',
+        'disable-notifications',
+      ],
+      prefs: {
+        'profile.manged_default_content_settings.popup': 2,
+      },
+    },
   }],
 
   bail: 0,

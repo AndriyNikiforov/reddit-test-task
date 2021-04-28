@@ -30,6 +30,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-wdio": "^7.4.2",
     "geckodriver": "^1.22.3",
-    "wdio-chromedriver-service": "^7.0.0"
+    "wdio-chromedriver-service": "^7.0.0",
+    "wdio-screen-commands": "^5.4.0"
   }
 }

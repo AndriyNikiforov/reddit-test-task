@@ -1,4 +1,16 @@
+const cmds = require('wdio-screen-commands');
+
 exports.config = {
+  screenshots: {
+    saveOnFail: true,
+  },
+  videos: {
+    dir: 'reports/videos',
+    enabled: true,
+    inputFormat: 'mp4',
+    startDelay: 500,
+    stopDelay: 500,
+  },
   //
   // ====================
   // Runner Configuration
@@ -226,6 +238,7 @@ exports.config = {
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
   beforeTest(test, context) {
+    cmds.startScreenRecording(test);
     browser.setWindowSize(1920, 1080);
   },
   /**
@@ -246,6 +259,8 @@ exports.config = {
   afterTest(test, context, {
     error, result, duration, passed, retries,
   }) {
+    cmds.stopScreenRecording(test, result);
+    cmds.saveScreenshotByTest(test, result);
     if (!passed) {
       browser.takeScreenshot();
     }

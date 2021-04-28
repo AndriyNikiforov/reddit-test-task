@@ -10,6 +10,7 @@ exports.config = {
     inputFormat: 'mp4',
     startDelay: 500,
     stopDelay: 500,
+    port: 5555,
   },
   //
   // ====================

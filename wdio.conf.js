@@ -11,6 +11,7 @@ exports.config = {
     startDelay: 500,
     stopDelay: 500,
     port: 9000,
+    hostname: '0.0.0.0',
   },
   //
   // ====================

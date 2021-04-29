@@ -81,7 +81,6 @@ exports.config = {
       ],
       prefs: {
         'profile.managed_default_content_settings.popups': 2,
-        'profile.managed_default_content_settings.': 2,
       },
     },
     // If outputDir is provided WebdriverIO can capture driver session logs

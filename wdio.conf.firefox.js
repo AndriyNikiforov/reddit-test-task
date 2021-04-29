@@ -1,4 +1,11 @@
 exports.config = {
+  videos: {
+    dir: 'reports/videos',
+    enabled: true,
+    startDelay: 500,
+    stopDelay: 500,
+    resolution: '1920x1080',
+  },
   //
   // ====================
   // Runner Configuration

@@ -7,12 +7,9 @@ exports.config = {
   videos: {
     dir: 'reports/videos',
     enabled: true,
-    inputFormat: 'mp4',
     startDelay: 500,
     stopDelay: 500,
-    port: 9000,
-    hostname: 'localhost',
-    protocol: 'http',
+    resolution: '1920x1080',
   },
   //
   // ====================
@@ -80,8 +77,6 @@ exports.config = {
       args: [
         '--no-sandbox',
         '--disable-infobars',
-        '--headless',
-        '--disable-gpu',
         '--window-size=1440,735',
         'disable-infobars',
         'disable-popup-blocking',
@@ -263,7 +258,6 @@ exports.config = {
     error, result, duration, passed, retries,
   }) {
     cmds.stopScreenRecording(test, result);
-    cmds.saveScreenshotByTest(test, result);
     if (!passed) {
       browser.takeScreenshot();
     }

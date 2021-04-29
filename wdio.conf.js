@@ -1,9 +1,6 @@
 const cmds = require('wdio-screen-commands');
 
 exports.config = {
-  screenshots: {
-    saveOnFail: true,
-  },
   videos: {
     dir: 'reports/videos',
     enabled: true,
